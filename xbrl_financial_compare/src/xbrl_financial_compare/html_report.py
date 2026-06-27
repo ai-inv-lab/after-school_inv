@@ -48,6 +48,7 @@ def write_html_report(records: list[FinancialRecord], metrics_df: pd.DataFrame, 
             "<main>",
             "<h1>EDINET XBRL 財務比較レポート</h1>",
             "<p class=\"lead\">EDINETからダウンロードしたXBRL zipをArelleで読み込み、連結のBS/PL/CFと文章項目を比較しています。</p>",
+            _render_sample_notice(records),
             _render_summary(records),
             "<h2>PL比較</h2>",
             _render_pl_table(records),
@@ -84,6 +85,17 @@ def _render_summary(records: list[FinancialRecord]) -> str:
         "<h2>対象書類</h2>"
         "<table><thead><tr><th>コード</th><th>会社名</th><th>期末日</th><th>元zip</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table>"
+    )
+
+
+def _render_sample_notice(records: list[FinancialRecord]) -> str:
+    if not records or any(record.source_file != "sample" for record in records):
+        return ""
+    return (
+        "<p class=\"notice\">"
+        "このレポートはプログラムの動作説明用サンプルです。実在する会社名と証券コードを題材にしていますが、"
+        "数値と文章は架空データであり、実際の有価証券報告書の値ではありません。"
+        "</p>"
     )
 
 
@@ -239,6 +251,7 @@ h1 { margin: 0 0 8px; font-size: 30px; }
 h2 { margin-top: 34px; border-bottom: 2px solid #d7dce3; padding-bottom: 8px; }
 h3 { margin: 0 0 12px; font-size: 17px; }
 .lead { color: #4c5563; }
+.notice { border: 1px solid #d7b46a; background: #fff7df; color: #60420b; padding: 12px 14px; margin: 18px 0 22px; }
 table { width: 100%; border-collapse: collapse; background: white; margin: 14px 0 24px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
 th, td { border: 1px solid #dfe3e8; padding: 9px 10px; text-align: right; vertical-align: top; }
 th { background: #eef2f6; font-weight: 700; }

@@ -12,6 +12,7 @@ h1 { margin: 0 0 8px; font-size: 30px; }
 h2 { margin-top: 34px; border-bottom: 2px solid #d7dce3; padding-bottom: 8px; }
 h3 { margin: 0 0 12px; font-size: 17px; }
 .lead { color: #4c5563; }
+.notice { border: 1px solid #d7b46a; background: #fff7df; color: #60420b; padding: 12px 14px; margin: 18px 0 22px; }
 table { width: 100%; border-collapse: collapse; background: white; margin: 14px 0 24px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
 th, td { border: 1px solid #dfe3e8; padding: 9px 10px; text-align: right; vertical-align: top; }
 th { background: #eef2f6; font-weight: 700; }
@@ -48,6 +49,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
 <main>
 <h1>EDINET XBRL 財務比較レポート</h1>
 <p class="lead">EDINETからダウンロードしたXBRL zipをArelleで読み込み、連結のBS/PL/CFと文章項目を比較しています。</p>
+<p class="notice">このレポートはプログラムの動作説明用サンプルです。実在する会社名と証券コードを題材にしていますが、数値と文章は架空データであり、実際の有価証券報告書の値ではありません。</p>
 <h2>対象書類</h2><table><thead><tr><th>コード</th><th>会社名</th><th>期末日</th><th>元zip</th></tr></thead><tbody><tr><td>6526</td><td>ソシオネクスト</td><td>2025-03-31</td><td>sample</td></tr><tr><td>6769</td><td>ザインエレクトロニクス</td><td>2024-12-31</td><td>sample</td></tr><tr><td>6875</td><td>メガチップス</td><td>2025-03-31</td><td>sample</td></tr></tbody></table>
 <h2>PL比較</h2>
 <table><thead><tr><th>項目</th><th>6526<br>ソシオネクスト</th><th>6769<br>ザインエレクトロニクス</th><th>6875<br>メガチップス</th></tr></thead><tbody><tr><th>売上高<br><span>今年度</span></th><td>2,212.00 億円</td><td>59.00 億円</td><td>724.00 億円</td></tr><tr><th>売上高<br><span>前年度</span></th><td>1,928.00 億円</td><td>53.00 億円</td><td>679.00 億円</td></tr><tr class="sub"><th>売上高<br><span>前年比</span></th><td>14.73%</td><td>11.32%</td><td>6.63%</td></tr><tr><th>営業利益<br><span>今年度</span></th><td>309.00 億円</td><td>4.10 億円</td><td>68.00 億円</td></tr><tr><th>営業利益<br><span>前年度</span></th><td>264.00 億円</td><td>-1.20 億円</td><td>73.00 億円</td></tr><tr class="sub"><th>営業利益<br><span>前年比</span></th><td>17.05%</td><td>-441.67%</td><td>-6.85%</td></tr><tr><th>当期純利益<br><span>今年度</span></th><td>228.00 億円</td><td>5.20 億円</td><td>85.00 億円</td></tr><tr><th>当期純利益<br><span>前年度</span></th><td>197.00 億円</td><td>-2.60 億円</td><td>69.00 億円</td></tr><tr class="sub"><th>当期純利益<br><span>前年比</span></th><td>15.74%</td><td>-300.00%</td><td>23.19%</td></tr><tr><th>研究開発費<br><span>今年度</span></th><td>334.00 億円</td><td>11.20 億円</td><td>127.00 億円</td></tr><tr><th>研究開発費<br><span>前年度</span></th><td>282.00 億円</td><td>10.40 億円</td><td>118.00 億円</td></tr><tr class="sub"><th>研究開発費<br><span>前年比</span></th><td>18.44%</td><td>7.69%</td><td>7.63%</td></tr></tbody></table>

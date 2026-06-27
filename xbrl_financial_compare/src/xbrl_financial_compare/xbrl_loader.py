@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
-from zipfile import ZipFile
+from zipfile import ZipFile, ZipInfo
 
 import tempfile
 import xml.etree.ElementTree as ET
@@ -11,6 +11,9 @@ from bs4 import BeautifulSoup
 
 from .model import FinancialRecord
 
+
+MAX_ZIP_MEMBER_BYTES = 200 * 1024 * 1024
+MAX_ZIP_TOTAL_BYTES = 500 * 1024 * 1024
 
 CONCEPT_ALIASES = {
     "net_sales": [
@@ -130,11 +133,12 @@ def _extract_metadata(zip_path: Path, notes: list[str]) -> dict[str, str]:
         "PeriodEndDate",
     }
     with ZipFile(zip_path) as archive:
-        for name in archive.namelist():
+        for member in _safe_zip_members(archive):
+            name = member.filename
             if not name.lower().endswith((".xbrl", ".xml", ".htm", ".html")):
                 continue
             try:
-                text = archive.read(name).decode("utf-8", errors="ignore")
+                text = archive.read(member).decode("utf-8", errors="ignore")
             except Exception:
                 continue
             soup = BeautifulSoup(text, "xml")
@@ -174,7 +178,7 @@ def _extract_with_arelle(
     with tempfile.TemporaryDirectory() as tmp:
         tmp_dir = Path(tmp)
         with ZipFile(zip_path) as archive:
-            archive.extractall(tmp_dir)
+            _safe_extract_all(archive, tmp_dir)
         entry = _find_entrypoint(tmp_dir)
         if entry is None:
             notes.append("XBRLの入口ファイルを見つけられませんでした。")
@@ -226,11 +230,12 @@ def _extract_with_xml_scan(
     facts: dict[str, dict] = {}
     text_blocks: dict[str, dict] = {}
     with ZipFile(zip_path) as archive:
-        for name in archive.namelist():
+        for member in _safe_zip_members(archive):
+            name = member.filename
             if not name.lower().endswith((".xbrl", ".xml", ".htm", ".html")):
                 continue
             try:
-                text = archive.read(name).decode("utf-8", errors="ignore")
+                text = archive.read(member).decode("utf-8", errors="ignore")
             except Exception:
                 continue
             soup = BeautifulSoup(text, "xml")
@@ -382,14 +387,46 @@ def _normalize_ticker(value: str) -> str:
 
 def _guess_period_end(zip_path: Path) -> str | None:
     with ZipFile(zip_path) as archive:
-        for name in archive.namelist():
+        for member in _safe_zip_members(archive):
+            name = member.filename
             if not name.lower().endswith((".xbrl", ".xml", ".htm", ".html")):
                 continue
             try:
-                root = ET.fromstring(archive.read(name))
+                root = ET.fromstring(archive.read(member))
             except Exception:
                 continue
             for elem in root.iter():
                 if elem.tag.endswith("endDate") and elem.text:
                     return elem.text.strip()
     return None
+
+
+def _safe_extract_all(archive: ZipFile, destination: Path) -> None:
+    destination_root = destination.resolve()
+    for member in _safe_zip_members(archive):
+        target = (destination_root / member.filename).resolve()
+        if destination_root != target and destination_root not in target.parents:
+            raise ValueError(f"Unsafe zip member path: {member.filename}")
+        archive.extract(member, destination_root)
+
+
+def _safe_zip_members(archive: ZipFile) -> list[ZipInfo]:
+    members = archive.infolist()
+    total_size = 0
+    for member in members:
+        _validate_zip_member(member)
+        total_size += member.file_size
+        if total_size > MAX_ZIP_TOTAL_BYTES:
+            raise ValueError("XBRL zip is too large to process safely")
+    return members
+
+
+def _validate_zip_member(member: ZipInfo) -> None:
+    name = member.filename
+    if member.file_size > MAX_ZIP_MEMBER_BYTES:
+        raise ValueError(f"Zip member is too large: {name}")
+    if not name or "\x00" in name or "\\" in name or name.startswith(("/", "~")):
+        raise ValueError(f"Unsafe zip member path: {name}")
+    parts = Path(name).parts
+    if any(part in ("", ".", "..") for part in parts):
+        raise ValueError(f"Unsafe zip member path: {name}")

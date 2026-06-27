@@ -1,6 +1,8 @@
 from pathlib import Path
 from zipfile import ZipFile
 
+import pytest
+
 from xbrl_financial_compare.cli import main
 from xbrl_financial_compare.html_report import write_html_report
 from xbrl_financial_compare.metrics import records_to_metrics
@@ -42,6 +44,15 @@ def test_extract_record_reads_company_and_ticker_from_zip(tmp_path: Path):
     assert record.company == "ソシオネクスト"
     assert record.ticker == "6526"
     assert record.period_end == "2025-03-31"
+
+
+def test_extract_record_rejects_unsafe_zip_paths(tmp_path: Path):
+    zip_path = tmp_path / "unsafe.zip"
+    with ZipFile(zip_path, "w") as archive:
+        archive.writestr("../evil.xbrl", "<xbrl />")
+
+    with pytest.raises(ValueError, match="Unsafe zip member path"):
+        extract_record_from_zip(zip_path)
 
 
 def test_compare_zips_command_extracts_and_compares(tmp_path: Path):

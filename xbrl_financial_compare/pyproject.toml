@@ -7,6 +7,7 @@ name = "xbrl-financial-compare"
 version = "0.1.0"
 description = "Compare Japanese company financial metrics from EDINET XBRL files."
 requires-python = ">=3.10"
+license = "Apache-2.0"
 dependencies = [
   "arelle-release>=2.37.0",
   "beautifulsoup4>=4.12.0",
