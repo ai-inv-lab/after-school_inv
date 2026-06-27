@@ -94,21 +94,21 @@ uv run xbrl-financial-compare compare "sample/20260627/processed/*.json" --out s
 
 出力:
 
-- `sample/20260627/processed/sample-*.json`
+- `sample/20260627/processed/*.json`
 - `sample/20260627/comparison_metrics.csv`
 - `sample/20260627/report.html`
 
 Windowsではワイルドカードの展開方法がmacOS/Linuxと異なるため、`"sample/20260627/processed/*.json"` のように引用符付きで渡しても動くようにしています。
 
-## 記事からリンクするサンプル
+## 記事からリンクする実データ出力
 
-このリポジトリには、実際にこのプログラムで出力したサンプル成果物を `sample/20260627/` に置いています。
+このリポジトリには、実際にEDINETから取得したXBRL zipをこのプログラムで処理した成果物を `sample/20260627/` に置いています。
 
 - HTMLレポート: `sample/20260627/report.html`
 - 指標CSV: `sample/20260627/comparison_metrics.csv`
-- JSON: `sample/20260627/processed/sample-6526.json`, `sample/20260627/processed/sample-6875.json`, `sample/20260627/processed/sample-6769.json`
+- JSON: `sample/20260627/processed/6526.json`, `sample/20260627/processed/6875.json`, `sample/20260627/processed/6769.json`
 
-このサンプル成果物は、実在する会社名と証券コードを題材にしていますが、数値と文章はプログラムの動作説明用に作った架空データです。実際の有価証券報告書の値ではありません。
+対象書類は、ソシオネクスト（6526）、メガチップス（6875）、ザインエレクトロニクス（6769）の有価証券報告書XBRLです。元zipそのものはリポジトリには含めず、JSON/CSV/HTMLの出力結果だけを置いています。
 
 GitHub上でHTMLをそのまま開く場合は、通常のファイル表示ではなく、GitHub PagesやRaw表示を使います。記事からは、公開後のPages URLに差し替えるのが読みやすいです。
 
