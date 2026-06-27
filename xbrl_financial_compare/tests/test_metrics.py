@@ -64,6 +64,18 @@ def test_compare_zips_command_extracts_and_compares(tmp_path: Path):
     assert "QName" in report_text
 
 
+def test_compare_command_expands_glob_patterns(tmp_path: Path):
+    processed_dir = tmp_path / "processed"
+    write_sample_records(processed_dir)
+    out_dir = tmp_path / "sample"
+
+    status = main(["compare", str(processed_dir / "*.json"), "--out", str(out_dir)])
+
+    assert status == 0
+    assert (out_dir / "comparison_metrics.csv").exists()
+    assert (out_dir / "report.html").exists()
+
+
 def test_html_report_embeds_context_evidence(tmp_path: Path):
     record = FinancialRecord(
         ticker="6526",
@@ -114,7 +126,7 @@ def test_html_report_embeds_context_evidence(tmp_path: Path):
     assert "Prior1YearDuration" in text
     assert "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}NetSales" in text
     assert "Dimension" not in text
-    assert "テキストブロック比較" in text
+    assert "文章項目比較" in text
     assert "DescriptionOfBusinessTextBlock" in text
     assert "SoC製品の設計" in text
     assert "全文を開く" in text

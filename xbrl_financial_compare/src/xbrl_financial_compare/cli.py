@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from glob import glob
 
 from .html_report import write_html_report
 from .metrics import load_records, records_to_metrics
@@ -61,7 +62,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"- {note}")
         return 0
     if args.command == "compare":
-        csv_path, report_path = _write_comparison(load_records(args.inputs), args.out)
+        csv_path, report_path = _write_comparison(load_records(_expand_paths(args.inputs)), args.out)
         print(csv_path)
         print(report_path)
         return 0
@@ -69,7 +70,7 @@ def main(argv: list[str] | None = None) -> int:
         records = []
         processed_dir = args.processed_dir or args.out / "processed"
         processed_dir.mkdir(parents=True, exist_ok=True)
-        for zip_path in args.zips:
+        for zip_path in _expand_paths(args.zips):
             record = extract_record_from_zip(zip_path)
             records.append(record)
             json_path = processed_dir / f"{_safe_stem(record.ticker, zip_path)}.json"
@@ -90,6 +91,19 @@ def _write_comparison(records, out_dir: Path) -> tuple[Path, Path]:
     df.to_csv(csv_path, index=False)
     write_html_report(records, df, report_path)
     return csv_path, report_path
+
+
+def _expand_paths(paths: list[Path]) -> list[Path]:
+    expanded: list[Path] = []
+    for path in paths:
+        path_text = str(path)
+        if any(char in path_text for char in "*?["):
+            matches = [Path(match) for match in sorted(glob(path_text))]
+            if matches:
+                expanded.extend(matches)
+                continue
+        expanded.append(path)
+    return expanded
 
 
 def _safe_stem(ticker: str, zip_path: Path) -> str:

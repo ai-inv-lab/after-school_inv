@@ -1,0 +1,216 @@
+{
+  "ticker": "6875",
+  "company": "メガチップス",
+  "period_end": "2025-03-31",
+  "source_file": "sample",
+  "accounting_standard": "日本基準",
+  "consolidated": true,
+  "values": {
+    "net_sales": 72400000000,
+    "previous_net_sales": 67900000000,
+    "operating_income": 6800000000,
+    "previous_operating_income": 7300000000,
+    "profit": 8500000000,
+    "previous_profit": 6900000000,
+    "total_assets": 122000000000,
+    "previous_total_assets": 118000000000,
+    "equity": 86000000000,
+    "previous_equity": 80000000000,
+    "operating_cash_flow": 9800000000,
+    "previous_operating_cash_flow": 8900000000,
+    "investing_cash_flow": -3200000000,
+    "previous_investing_cash_flow": -4200000000,
+    "research_and_development_expenses": 12700000000,
+    "previous_research_and_development_expenses": 11800000000
+  },
+  "labels": {},
+  "facts": {
+    "net_sales": {
+      "current": {
+        "value": 72400000000,
+        "concept_name": "NetSales",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}NetSales",
+        "context_id": "CurrentYearDuration",
+        "period": "sample-current-year",
+        "dimensions": [],
+        "source": "sample"
+      },
+      "previous": {
+        "value": 67900000000,
+        "concept_name": "NetSales",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}NetSales",
+        "context_id": "Prior1YearDuration",
+        "period": "sample-prior-year",
+        "dimensions": [],
+        "source": "sample"
+      }
+    },
+    "operating_income": {
+      "current": {
+        "value": 6800000000,
+        "concept_name": "OperatingIncome",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}OperatingIncome",
+        "context_id": "CurrentYearDuration",
+        "period": "sample-current-year",
+        "dimensions": [],
+        "source": "sample"
+      },
+      "previous": {
+        "value": 7300000000,
+        "concept_name": "OperatingIncome",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}OperatingIncome",
+        "context_id": "Prior1YearDuration",
+        "period": "sample-prior-year",
+        "dimensions": [],
+        "source": "sample"
+      }
+    },
+    "profit": {
+      "current": {
+        "value": 8500000000,
+        "concept_name": "ProfitLoss",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}ProfitLoss",
+        "context_id": "CurrentYearDuration",
+        "period": "sample-current-year",
+        "dimensions": [],
+        "source": "sample"
+      },
+      "previous": {
+        "value": 6900000000,
+        "concept_name": "ProfitLoss",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}ProfitLoss",
+        "context_id": "Prior1YearDuration",
+        "period": "sample-prior-year",
+        "dimensions": [],
+        "source": "sample"
+      }
+    },
+    "research_and_development_expenses": {
+      "current": {
+        "value": 12700000000,
+        "concept_name": "ResearchAndDevelopmentExpensesSGA",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}ResearchAndDevelopmentExpensesSGA",
+        "context_id": "CurrentYearDuration",
+        "period": "sample-current-year",
+        "dimensions": [],
+        "source": "sample"
+      },
+      "previous": {
+        "value": 11800000000,
+        "concept_name": "ResearchAndDevelopmentExpensesSGA",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}ResearchAndDevelopmentExpensesSGA",
+        "context_id": "Prior1YearDuration",
+        "period": "sample-prior-year",
+        "dimensions": [],
+        "source": "sample"
+      }
+    },
+    "total_assets": {
+      "current": {
+        "value": 122000000000,
+        "concept_name": "Assets",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}Assets",
+        "context_id": "CurrentYearInstant",
+        "period": "sample-current-year",
+        "dimensions": [],
+        "source": "sample"
+      },
+      "previous": {
+        "value": 118000000000,
+        "concept_name": "Assets",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}Assets",
+        "context_id": "Prior1YearInstant",
+        "period": "sample-prior-year",
+        "dimensions": [],
+        "source": "sample"
+      }
+    },
+    "equity": {
+      "current": {
+        "value": 86000000000,
+        "concept_name": "NetAssets",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}NetAssets",
+        "context_id": "CurrentYearInstant",
+        "period": "sample-current-year",
+        "dimensions": [],
+        "source": "sample"
+      },
+      "previous": {
+        "value": 80000000000,
+        "concept_name": "NetAssets",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}NetAssets",
+        "context_id": "Prior1YearInstant",
+        "period": "sample-prior-year",
+        "dimensions": [],
+        "source": "sample"
+      }
+    },
+    "operating_cash_flow": {
+      "current": {
+        "value": 9800000000,
+        "concept_name": "NetCashProvidedByUsedInOperatingActivities",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}NetCashProvidedByUsedInOperatingActivities",
+        "context_id": "CurrentYearDuration",
+        "period": "sample-current-year",
+        "dimensions": [],
+        "source": "sample"
+      },
+      "previous": {
+        "value": 8900000000,
+        "concept_name": "NetCashProvidedByUsedInOperatingActivities",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}NetCashProvidedByUsedInOperatingActivities",
+        "context_id": "Prior1YearDuration",
+        "period": "sample-prior-year",
+        "dimensions": [],
+        "source": "sample"
+      }
+    },
+    "investing_cash_flow": {
+      "current": {
+        "value": -3200000000,
+        "concept_name": "NetCashProvidedByUsedInInvestmentActivities",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}NetCashProvidedByUsedInInvestmentActivities",
+        "context_id": "CurrentYearDuration",
+        "period": "sample-current-year",
+        "dimensions": [],
+        "source": "sample"
+      },
+      "previous": {
+        "value": -4200000000,
+        "concept_name": "NetCashProvidedByUsedInInvestmentActivities",
+        "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}NetCashProvidedByUsedInInvestmentActivities",
+        "context_id": "Prior1YearDuration",
+        "period": "sample-prior-year",
+        "dimensions": [],
+        "source": "sample"
+      }
+    }
+  },
+  "text_blocks": {
+    "description_of_business": {
+      "label": "事業の内容",
+      "text": "メガチップスは、特定用途向けLSIやシステム製品を扱う半導体関連企業です。ゲーム、通信、産業機器などの顧客分野に向けた製品開発と販売を行う想定のサンプル文章です。",
+      "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}DescriptionOfBusinessTextBlock",
+      "context_id": "FilingDateInstant",
+      "period": "sample-filing-date",
+      "source": "sample"
+    },
+    "business_environment": {
+      "label": "経営方針、経営環境及び対処すべき課題等",
+      "text": "顧客別の需要変動、在庫調整、為替、開発案件の採算が業績に影響します。自社の強みをどの用途に集中させるか、研究開発費をどの程度維持するかが比較ポイントになります。",
+      "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}BusinessPolicyBusinessEnvironmentIssuesToAddressEtcTextBlock",
+      "context_id": "FilingDateInstant",
+      "period": "sample-filing-date",
+      "source": "sample"
+    },
+    "management_analysis": {
+      "label": "経営者による財政状態、経営成績及びキャッシュ・フローの状況の分析",
+      "text": "売上高は緩やかに増えていますが、営業利益はやや弱含みです。営業外・特別項目を含む純利益との違いを確認し、PLのどこで変化が起きたかを見るためのサンプルです。",
+      "concept_qname": "{http://disclosure.edinet-fsa.go.jp/taxonomy/jppfs/2025-11-01/jppfs_cor}ManagementAnalysisOfFinancialPositionOperatingResultsAndCashFlowsTextBlock",
+      "context_id": "FilingDateInstant",
+      "period": "sample-filing-date",
+      "source": "sample"
+    }
+  },
+  "notes": []
+}

@@ -46,8 +46,17 @@ uv --version
 
 ### 依存関係を入れる
 
+macOS / Linux:
+
 ```bash
 cd programs/xbrl_financial_compare
+uv sync
+```
+
+Windows PowerShell:
+
+```powershell
+cd programs\xbrl_financial_compare
 uv sync
 ```
 
@@ -55,17 +64,51 @@ uv sync
 
 ## まず試す
 
+macOS / Linux:
+
 ```bash
 cd programs/xbrl_financial_compare
-uv run xbrl-financial-compare sample
-uv run xbrl-financial-compare compare data/processed/*.json --out outputs
+./scripts/run_sample.sh
+```
+
+Windows PowerShell:
+
+```powershell
+cd programs\xbrl_financial_compare
+.\scripts\run_sample.ps1
+```
+
+PowerShellでスクリプト実行が止められる場合は、このターミナルだけ実行を許可します。
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\scripts\run_sample.ps1
+```
+
+スクリプトを使わずに直接実行する場合:
+
+```bash
+uv run xbrl-financial-compare sample --out sample/20260627/processed
+uv run xbrl-financial-compare compare "sample/20260627/processed/*.json" --out sample/20260627
 ```
 
 出力:
 
-- `data/processed/sample-*.json`
-- `outputs/comparison_metrics.csv`
-- `outputs/report.html`
+- `sample/20260627/processed/sample-*.json`
+- `sample/20260627/comparison_metrics.csv`
+- `sample/20260627/report.html`
+
+Windowsではワイルドカードの展開方法がmacOS/Linuxと異なるため、`"sample/20260627/processed/*.json"` のように引用符付きで渡しても動くようにしています。
+
+## 記事からリンクするサンプル
+
+このリポジトリには、実際にこのプログラムで出力したサンプル成果物を `sample/20260627/` に置いています。
+
+- HTMLレポート: `sample/20260627/report.html`
+- 指標CSV: `sample/20260627/comparison_metrics.csv`
+- JSON: `sample/20260627/processed/sample-6526.json`, `sample/20260627/processed/sample-6875.json`, `sample/20260627/processed/sample-6769.json`
+
+GitHub上でHTMLをそのまま開く場合は、通常のファイル表示ではなく、GitHub PagesやRaw表示を使います。記事からは、公開後のPages URLに差し替えるのが読みやすいです。
 
 ## Apple containerで試す
 
@@ -92,12 +135,25 @@ container run --rm xbrl-financial-compare
 
 ## 複数のXBRL zipを一気に比較する
 
+macOS / Linux:
+
 ```bash
 cd programs/xbrl_financial_compare
 uv run xbrl-financial-compare compare-zips \
   data/raw/socionext.zip \
   data/raw/megachips.zip \
   data/raw/thine.zip \
+  --out outputs
+```
+
+Windows PowerShell:
+
+```powershell
+cd programs\xbrl_financial_compare
+uv run xbrl-financial-compare compare-zips `
+  data\raw\socionext.zip `
+  data\raw\megachips.zip `
+  data\raw\thine.zip `
   --out outputs
 ```
 
@@ -155,12 +211,22 @@ uvが使えない環境では、標準のvenvでも動かせます。
 cd programs/xbrl_financial_compare
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt
-.venv/bin/python -m xbrl_financial_compare sample
-.venv/bin/python -m xbrl_financial_compare compare data/processed/*.json --out outputs
+.venv/bin/python -m xbrl_financial_compare sample --out sample/20260627/processed
+.venv/bin/python -m xbrl_financial_compare compare "sample/20260627/processed/*.json" --out sample/20260627
+```
+
+Windows PowerShell:
+
+```powershell
+cd programs\xbrl_financial_compare
+py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m xbrl_financial_compare sample --out sample/20260627/processed
+.\.venv\Scripts\python.exe -m xbrl_financial_compare compare "sample/20260627/processed/*.json" --out sample/20260627
 ```
 
 ## 注意
 
 - XBRLはそのまま読むものではなく、Arelleのようなソフトウェアで解析します。
-- EDINETの提出書類ごとにタグや文脈が異なることがあります。このプログラムは、ディメンションを持たない `CurrentYearDuration` / `Prior1YearDuration` / `CurrentYearInstant` などのコンテキストを優先して使います。
+- EDINETの提出書類ごとにタグや文脈が異なることがあります。このプログラムは、連結の `CurrentYearDuration` / `Prior1YearDuration` / `CurrentYearInstant` などのコンテキストを優先して使います。
 - 投資判断ではなく、一次情報を扱う練習用です。
